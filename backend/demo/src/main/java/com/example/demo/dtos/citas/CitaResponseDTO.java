@@ -12,6 +12,7 @@ public class CitaResponseDTO {
     private String date; // String YYYY-MM-DD
     private String time; // String HH:mm
     private String duration; // "30 min" (calculated by Mapper)
+    private boolean blocked;
     
     // Embedded object for Usuario info
     private UsuarioCitaResponse usuario; 
@@ -20,6 +21,7 @@ public class CitaResponseDTO {
     private String typeColor; // "teal"
     private String status; // Display name: "Confirmada"
     private String statusColor; // "green"
+    
     @Data
     @Builder
     @NoArgsConstructor

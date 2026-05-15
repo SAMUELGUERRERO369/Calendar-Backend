@@ -15,6 +15,7 @@ import com.example.demo.repositories.horarios.HorarioReglaRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +87,18 @@ public class HorariosServiceImpl implements HorariosService {
     @Override
     public List<FechaBloqueadaResponseDTO> getBloqueadas() {
         List<FechaBloqueada> bloqueadas = fechaBloqueadaRepository.findAll();
+        return horarioMapper.toFechaBloqueadaResponseDTOList(bloqueadas);
+    }
+
+    @Override
+    public List<FechaBloqueadaResponseDTO> getBloqueadasByDate(LocalDate date) {
+        List<FechaBloqueada> bloqueadas = fechaBloqueadaRepository.findByDate(date);
+        return horarioMapper.toFechaBloqueadaResponseDTOList(bloqueadas);
+    }
+    
+    @Override
+    public List<FechaBloqueadaResponseDTO> getBloqueadasByDateBetween(LocalDate start, LocalDate end) {
+        List<FechaBloqueada> bloqueadas = fechaBloqueadaRepository.findByDateBetween(start, end);
         return horarioMapper.toFechaBloqueadaResponseDTOList(bloqueadas);
     }
 

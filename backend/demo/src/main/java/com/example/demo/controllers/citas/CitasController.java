@@ -3,8 +3,8 @@ package com.example.demo.controllers.citas;
 import com.example.demo.dtos.citas.CitaRequestDTO;
 import com.example.demo.dtos.citas.CitaResponseDTO;
 import com.example.demo.exceptions.BadRequestException;
-import com.example.demo.models.citas.CitaStatus;
 import com.example.demo.services.citas.CitasService;
+import com.example.demo.services.horarios.CalendarEventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CitasController {
 
+	private final CalendarEventService calendarEventService;
 	private final CitasService citasService;
 
 	@GetMapping
@@ -39,9 +40,8 @@ public class CitasController {
 	) {
 		LocalDate parsedDate = parseDate(date);
 		YearMonth parsedMonth = parsedDate == null ? parseMonth(month) : null;
-		CitaStatus parsedStatus = parseStatus(status);
 
-		List<CitaResponseDTO> response = citasService.listar(parsedDate, parsedMonth, limit, parsedStatus);
+		List<CitaResponseDTO> response = calendarEventService.listar(parsedDate, parsedMonth, limit, status);
 		return ResponseEntity.ok(response);
 	}
 
@@ -88,14 +88,4 @@ public class CitasController {
 		}
 	}
 
-	private CitaStatus parseStatus(String value) {
-		if (value == null || value.isBlank()) {
-			return null;
-		}
-		try {
-			return CitaStatus.valueOf(value.trim().toUpperCase());
-		} catch (IllegalArgumentException ex) {
-			throw new BadRequestException("Estado invalido");
-		}
-	}
 }
