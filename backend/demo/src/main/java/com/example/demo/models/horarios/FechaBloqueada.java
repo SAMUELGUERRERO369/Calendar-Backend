@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
+import java.time.LocalTime;
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,4 +17,6 @@ public class FechaBloqueada {
     private String id;
     private LocalDate date;
     private String reason;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
 }

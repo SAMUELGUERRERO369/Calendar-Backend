@@ -11,4 +11,6 @@ public class FechaBloqueadaResponseDTO {
     private String id;
     private String date;
     private String reason;
+    private String horaInicio; // HH:mm
+    private String horaFin;    // HH:mm
 }

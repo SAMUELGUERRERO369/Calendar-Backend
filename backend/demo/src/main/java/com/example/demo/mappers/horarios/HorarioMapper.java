@@ -31,9 +31,13 @@ public abstract class HorarioMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "date", source = "date", qualifiedByName = "stringToLocalDate")
+    @Mapping(target = "horaInicio", source = "horaInicio", qualifiedByName = "stringToLocalTime")
+    @Mapping(target = "horaFin", source = "horaFin", qualifiedByName = "stringToLocalTime")
     public abstract FechaBloqueada toEntity(FechaBloqueadaRequestDTO dto);
 
     @Mapping(target = "date", source = "date", qualifiedByName = "localDateToString")
+    @Mapping(target = "horaInicio", source = "horaInicio", qualifiedByName = "localTimeToString")
+    @Mapping(target = "horaFin", source = "horaFin", qualifiedByName = "localTimeToString")
     public abstract FechaBloqueadaResponseDTO toFechaBloqueadaResponseDTO(FechaBloqueada entity);
 
     public abstract List<FechaBloqueadaResponseDTO> toFechaBloqueadaResponseDTOList(List<FechaBloqueada> entities);
